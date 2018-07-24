@@ -1,0 +1,51 @@
+page-login {
+  #loginContent {
+        margin: auto !important;
+  }
+  .toolbar-background {
+    background: transparent;
+    border-style: none;
+  }
+  .toolbar::after,
+  .header-md::after {
+    background-image: none;
+  }
+  ion-content {
+    background-color: color($colors, primary);
+    background-image: url("../assets/imgs/bg-1.jpg");
+    background-size: 100% auto;
+  }
+
+  //.scroll-content { display: table; width: 100%; height: 100%; }
+  .centerAlign {
+    display: table-cell;
+    vertical-align: middle;
+    border: #ff0000 1px solid;
+  }
+
+  .item {
+    border: $border-color 1px solid !important;
+    margin-bottom: 10px;
+  }
+}
+#loginGrid > * {
+  //width: 100px !important;
+  display: flex !important;
+  align-content: center !important;
+  align-items: center !important;
+  justify-content: center !important;
+  justify-items: center !important;
+  // padding-left:1em  !important; 
+  //  padding-right:1em  !important;
+
+}
+@media (max-width: 500px) {
+  #loginContent {
+    width: 100%;
+  }
+}
+@media (min-width: 500px) {
+  #loginContent {
+    width: 50%;
+  }
+}
