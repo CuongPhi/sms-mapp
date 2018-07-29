@@ -10,7 +10,7 @@
 <ion-content padding>
   <div id='loginContent'>
     <div text-center>
-      <img src="assets/imgs/login.png" width="100">
+      <img src="assets/imgs/login.png" (click)='closeLogin()' width="100">
     </div>
     <ion-grid id='loginGrid'>
       <ion-row>
@@ -38,10 +38,10 @@
     <form [formGroup]='formLogin' (submit)='onLoginWithEmail()'>
       <ion-list no-lines padding-top>
         <ion-item>
-          <ion-input formControlName='email' type="text" placeholder="Email"></ion-input>
+          <ion-input formControlName='email' type="text" placeholder="Email">cuong123@gmail.com</ion-input>
         </ion-item>
         <ion-item>
-          <ion-input formControlName='password' type="password" placeholder="Password"></ion-input>
+          <ion-input formControlName='password' type="password" placeholder="Password">cuong123</ion-input>
         </ion-item>
       </ion-list>
       <button ion-button block round type="submit" color="secondary">Đăng nhập</button>
@@ -50,5 +50,6 @@
       <button ion-button block color="light" clear (click)="signupPage()">Đăng ký tài khoản !</button>
       <button ion-button block color="light" clear (click)="forgotPasswordPage()">Quên mật khẩu ?</button>
     </div>
+    <span>Your email : {{getUserEmail()}}</span>
   </div>
 </ion-content>

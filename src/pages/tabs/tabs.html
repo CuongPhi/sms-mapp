@@ -1,5 +1,5 @@
 <ion-tabs>
-  <ion-tab [root]="tab1Root" tabTitle="Trang chủ" tabIcon="home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="Theo dõi" tabIcon="cash"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Tài khoản" tabIcon="person"></ion-tab>
+  <ion-tab [root]="tab1Root"  show="{{tabsEnabled}}"  tabTitle="Trang chủ" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tab2Root"  show="{{tabsEnabled}}" tabTitle="Theo dõi" tabIcon="cash"></ion-tab>
+  <ion-tab [root]="tab3Root" show="{{tabsEnabled}}"  tabTitle="Tài khoản" tabIcon="person"></ion-tab>
 </ion-tabs>
