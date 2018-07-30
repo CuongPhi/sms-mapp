@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthProvProvider } from '../../providers/auth-prov/auth-prov';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the UserPage page.
@@ -13,13 +15,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-user',
   templateUrl: 'user.html',
 })
-export class UserPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class UserPage implements OnInit{
+  currUser;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authProv: AuthProvProvider) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad UserPage');
-  }
-
+  ionViewWillEnter(){
+   // this.currUser = this.authProv.getCurrUser();
+  
+   }
+ngOnInit(){
+ 
+}
 }

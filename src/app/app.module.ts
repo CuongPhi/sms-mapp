@@ -14,6 +14,7 @@ import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { AuthProvProvider } from '../providers/auth-prov/auth-prov';
 import { HttpClientModule } from '@angular/common/http';
+import { Facebook } from '@ionic-native/facebook'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {tabsHideOnSubPages: false}),
     HttpClientModule
   ],
   bootstrap: [IonicApp],
@@ -44,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvProvider
+    AuthProvProvider,
+    Facebook
   ]
 })
 export class AppModule {}

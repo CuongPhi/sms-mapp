@@ -1,10 +1,12 @@
 import { Component } from "@angular/core";
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from "ionic-angular";
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, Config } from "ionic-angular";
 import { HomePage } from "../home/home";
 import { SignupPage } from "../signup/signup";
 import { FormBuilder } from "@angular/forms";
 import { AuthProvProvider } from "../../providers/auth-prov/auth-prov";
 import { TabsPage } from "../tabs/tabs";
+import { Tabs } from "ionic-angular/umd/navigation/nav-interfaces";
+import { AccountPage } from "../account/account";
 
 /**
  * Generated class for the LoginPage page.
@@ -20,25 +22,41 @@ import { TabsPage } from "../tabs/tabs";
 })
 export class LoginPage {
   formLogin;
+  tabsPage;
+  currUser;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public fDB: FormBuilder,
-    public authPr: AuthProvProvider,
     public alerCtrl: AlertController,
-    public  loadCtrl:LoadingController
+    public  loadCtrl:LoadingController,
+    public authProv: AuthProvProvider,
+    public config:Config
   ) {
     this.formLogin = fDB.group({
       email: [""],
       password: [""]
     });
-  }
+    //this.config.set('tabsHideOnSubPages', true)
 
-  ionViewDidLoad() {
-    console.log("ionViewDidLoad LoginPage");
   }
+  ionViewDidEnter() {  
+    this.tabsPage  = (this.navCtrl.parent as Tabs).viewCtrl.instance;
+    this.tabsPage.enableTabs(false);        
+  }
+  ionViewDidLoad() {
+  
+  }
+  
   onLoginWithFB(): void {
-    console.log("login with fb");
+    this.authProv.facebookLogin()
+    .then(user=>{
+      //console.log(user);
+      this.onLoginOK();
+    })
+    .catch(err=>{
+     // console.log(err)
+    })
 
     //this.navCtrl.popTo(HomePage)
     // this.navCtrl.parent.select(0);
@@ -49,13 +67,13 @@ export class LoginPage {
     //this.navCtrl.popTo(HomePage)
   }
   signupPage(): void {
-    this.navCtrl.setRoot(SignupPage);
+    this.navCtrl.push(SignupPage);
   }
   onLoginWithEmail(): void {
-    this.authPr
+    this.authProv
     .logIn(this.formLogin.value.email, this.formLogin.value.password)
     .then(user => {
-      this.onLoginOK(user.user.uid);
+      this.onLoginOK();
     })
     .catch(err => {
       let alert = this.alerCtrl.create({
@@ -74,7 +92,7 @@ export class LoginPage {
   forgotPasswordPage(): void {
    
   }
-  onLoginOK(userID:string):void {
+  onLoginOK():void {
     let loading = this.loadCtrl.create({
       content: 'Loading Please Wait...'
     });
@@ -82,8 +100,18 @@ export class LoginPage {
     loading.present();
   
     setTimeout(() => {
-      this.navCtrl.setRoot(TabsPage, {uid: userID});
+      this.tabsPage.enableTabs(true);
+      this.navCtrl.pop().then(()=>{
+        this.navCtrl.parent.select(0);
+      });
     }, 1000);  
     loading.dismiss();
+  }
+  getUserEmail (){
+    return this.currUser ? this.currUser.email :'no email';
+  }
+  closeLogin(){
+    this.tabsPage.enableTabs(true);  
+    this.navCtrl.pop();
   }
 }

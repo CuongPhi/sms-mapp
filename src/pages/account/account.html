@@ -11,8 +11,40 @@
   </ion-navbar>
 
 </ion-header>
-
-
 <ion-content padding>
+  <ion-card *ngIf='!currUser'>
+    <ion-card-header>
+      NOT LOGIN
+    </ion-card-header>
+    <ion-card-content>
+      <button ion-button (click)='goLoginPage()'>Please LOGIN</button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card *ngIf='currUser'>
+
+    <ion-card-header>
+      <!-- {{ disPlayName-->
+      Nguyễn Phi Cường
+      <!-- }} -->
+    </ion-card-header>
+    <ion-card-content>
+      <img src="{{currUser.photoURL}}" />
+      <ion-list>
+        <button ion-item>
+          <ion-icon name="cart" item-start></ion-icon>
+          Email: {{currUser.email}}
+        </button>
+        <button ion-item>
+          <ion-icon name="beer" item-start></ion-icon>
+          UID: {{currUser.uid }}
+        </button>
+      </ion-list>
+    </ion-card-content>
+    <button ion-button block full color='secondary' (click)='onLogOut()'>Đăng xuất </button>
+
+  </ion-card>
 
 </ion-content>
