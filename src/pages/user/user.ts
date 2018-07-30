@@ -21,14 +21,10 @@ export class UserPage implements OnInit{
   }
 
   ionViewWillEnter(){
-    this.currUser = this.authProv.getCurrUser();
+   // this.currUser = this.authProv.getCurrUser();
   
    }
 ngOnInit(){
-  if(this.currUser){
-  }   
-  else{
-    //this.navCtrl.setRoot(LoginPage);
-  }
+ 
 }
 }

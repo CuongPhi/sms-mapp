@@ -16,17 +16,10 @@ export class TabsPage {
   tab1Root = HomePage;
   tab2Root = UserPage;
   tab3Root = AccountPage;
-  currUser;
+  currUser=null;
   constructor(public navParams: NavParams, public authProv:AuthProvProvider) {
     // let uid= navParams.get('uid');
-    this.currUser=authProv.getCurrUser();
-    if(this.currUser){
-      //user was loged in
-      console.log('user is login ')
-    }
-    else{
-      console.log('user not login ')
-    }
+       
   }
   enableTabs(enable: boolean): void {
     this.tabsEnabled = enable;

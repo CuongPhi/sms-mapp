@@ -10,19 +10,13 @@ import { Tabs } from 'ionic-angular/umd/navigation/nav-interfaces';
 })
 export class HomePage implements OnInit {
   currUser;
-  constructor(public navCtrl: NavController, public authPrv: AuthProvProvider) {
+  constructor(public navCtrl: NavController, public authProv: AuthProvProvider) {
 
   }
   ionViewWillEnter(){
-    this.currUser = this.authPrv.getCurrUser();
   
    }
 ngOnInit(){
-  if(this.currUser){
 
-  }   
-  else{
-    //this.navCtrl.setRoot(LoginPage);
-  }
 }
 }

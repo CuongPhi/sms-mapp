@@ -38,10 +38,10 @@
     <form [formGroup]='formLogin' (submit)='onLoginWithEmail()'>
       <ion-list no-lines padding-top>
         <ion-item>
-          <ion-input formControlName='email' type="text" placeholder="Email">cuong123@gmail.com</ion-input>
+          <ion-input formControlName='email' type="text" value='cuong123@gmail.com' placeholder="Email"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input formControlName='password' type="password" placeholder="Password">cuong123</ion-input>
+          <ion-input formControlName='password' type="password" value='cuong123' placeholder="Password"></ion-input>
         </ion-item>
       </ion-list>
       <button ion-button block round type="submit" color="secondary">Đăng nhập</button>

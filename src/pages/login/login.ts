@@ -45,7 +45,7 @@ export class LoginPage {
     this.tabsPage.enableTabs(false);        
   }
   ionViewDidLoad() {
-    this.currUser = this.authProv.getCurrUser();
+  
   }
   
   onLoginWithFB(): void {
@@ -67,7 +67,7 @@ export class LoginPage {
     //this.navCtrl.popTo(HomePage)
   }
   signupPage(): void {
-    this.navCtrl.setRoot(SignupPage);
+    this.navCtrl.push(SignupPage);
   }
   onLoginWithEmail(): void {
     this.authProv
@@ -101,7 +101,9 @@ export class LoginPage {
   
     setTimeout(() => {
       this.tabsPage.enableTabs(true);
-      this.navCtrl.parent.select(0);
+      this.navCtrl.pop().then(()=>{
+        this.navCtrl.parent.select(0);
+      });
     }, 1000);  
     loading.dismiss();
   }
@@ -110,6 +112,6 @@ export class LoginPage {
   }
   closeLogin(){
     this.tabsPage.enableTabs(true);  
-    this.navCtrl.parent.select(0);
+    this.navCtrl.pop();
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook'
+import { resolveDefinition } from '../../../node_modules/@angular/core/src/view/util';
 
   // Initialize Firebase
   var config = {
@@ -27,7 +28,21 @@ export class AuthProvProvider {
   logIn(email:string, password:string):Promise<any>{
     return firebase.auth().signInWithEmailAndPassword(email,password);
   }
-  getCurrUser(){
+  getCurrUserState():Promise<any>{
+     return new Promise((resolve, reject)=>{
+    firebase.auth().onAuthStateChanged(user=> 
+      {
+        if(user){
+          resolve(user);
+        }
+        else{
+          reject(('not login'));
+        }
+      }
+    )
+     })
+  }
+  getCurrUser():firebase.User{
     return firebase.auth().currentUser;
   }
   reAuthen(password:string):Promise<any> {
