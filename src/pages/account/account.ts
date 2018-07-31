@@ -36,22 +36,6 @@ export class AccountPage implements OnInit {
   ) {}
 
   ionViewDidLoad() {
-    // this.currUser=this.authProv
-    //   .getCurrUser()
-    //   console.log('ionViewDidLoad, user: ' + this.currUser);
-      // .then(user => {
-      //   console.log('account page user login ')
-      //   console.log(user);
-      //   this.currUser = user;
-      //   console.log(   this.currUser );
-
-      // })
-      // .catch(err => {
-      //   console.log('account page user not login ')
-
-      //   this.currUser= null;
-      //   console.log(err)
-      // });
   }
   ionViewWillEnter(){
     console.log('ionViewWillEnter');

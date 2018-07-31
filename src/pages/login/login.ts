@@ -23,7 +23,6 @@ import { AccountPage } from "../account/account";
 export class LoginPage {
   formLogin;
   tabsPage;
-  currUser;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -58,12 +57,16 @@ export class LoginPage {
      // console.log(err)
     })
 
-    //this.navCtrl.popTo(HomePage)
-    // this.navCtrl.parent.select(0);
+
   }
   onLoginWithGG(): void {
-    console.log("login with gg");
+    this.authProv.googleLogin()
+    .then(user=>{
+      this.onLoginOK();
+    })
+    .catch(err=>{
 
+    })
     //this.navCtrl.popTo(HomePage)
   }
   signupPage(): void {
@@ -106,9 +109,6 @@ export class LoginPage {
       });
     }, 1000);  
     loading.dismiss();
-  }
-  getUserEmail (){
-    return this.currUser ? this.currUser.email :'no email';
   }
   closeLogin(){
     this.tabsPage.enableTabs(true);  

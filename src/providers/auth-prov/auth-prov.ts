@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook'
-import { resolveDefinition } from '../../../node_modules/@angular/core/src/view/util';
+import { GooglePlus } from '@ionic-native/google-plus'
+
 
   // Initialize Firebase
   var config = {
@@ -18,7 +19,7 @@ import { resolveDefinition } from '../../../node_modules/@angular/core/src/view/
 @Injectable()
 export class AuthProvProvider {
 
-  constructor(public http: HttpClient, public facebook: Facebook) {
+  constructor(public http: HttpClient, public facebook: Facebook, public google:GooglePlus) {
     console.log('Hello AuthProvProvider Provider');
   }
   signUp(email:string, password:string):Promise<any>{
@@ -64,14 +65,26 @@ export class AuthProvProvider {
   
   facebookLogin(): Promise<any> {
     return this.facebook.login(['public_profile', 'email'])
-      .then( response => {
+      .then(response => {
         const facebookCredential = firebase.auth.FacebookAuthProvider
           .credential(response.authResponse.accessToken);
   
         firebase.auth().signInAndRetrieveDataWithCredential (facebookCredential)
           .then(data => { 
-          });
+            console.log(data);
+          }).catch(err => console.log(err));
   
       }).catch((error) => { console.log(error) });
+  }
+  googleLogin():Promise<any>{
+    return this.google.login({
+      'webClientId':'308605461456-ov2boa2t40n6bq9d87ebdjuc1d9votl3.apps.googleusercontent.com',
+      'offline': true
+    }).then(res=>{
+      const googleCredentail = firebase.auth.GoogleAuthProvider.credential(res.idToken)
+      firebase.auth().signInAndRetrieveDataWithCredential(googleCredentail).then(data=>{
+        console.log(data);
+      }).catch(err => console.log(err));
+    }).catch(err => console.log(err))
   }
 }
